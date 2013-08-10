@@ -11,6 +11,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 @SuppressLint("SetJavaScriptEnabled")
@@ -30,6 +31,9 @@ public class SearchResults extends Activity implements OnClickListener{
 	Button mCompareButton;
 	String mTerm;
 	View mDivider;
+	ProgressBar mPBOne;
+	ProgressBar mPBTwo;
+	
 	boolean mCompareMode;
 	
 	@Override
@@ -43,6 +47,8 @@ public class SearchResults extends Activity implements OnClickListener{
 		mGoToNewYorkTimes = (ImageButton) findViewById(R.id.newYorkTimesButton);
 		mCompareButton = (Button) findViewById(R.id.compareButton);
 		mDivider = findViewById(R.id.divider);
+		mPBOne = (ProgressBar) findViewById(R.id.progressBarOne);
+		mPBTwo = (ProgressBar) findViewById(R.id.progressBarTwo);
 		
 		mGoToWikipedia.setOnClickListener(this);
 		mGoToNewYorkTimes.setOnClickListener(this);
@@ -55,6 +61,10 @@ public class SearchResults extends Activity implements OnClickListener{
 		
 		mResult.getSettings().setJavaScriptEnabled(true);
 		mResult2.getSettings().setJavaScriptEnabled(true);
+		
+		mResult.setWebChromeClient(new CustomWebView(mPBOne));
+		mResult.setWebViewClient(new WebViewClient());
+		mResult2.setWebChromeClient(new CustomWebView(mPBTwo));
 		mResult2.setWebViewClient(new WebViewClient());
 		
 		//default is the Wikipedia result

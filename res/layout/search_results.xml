@@ -4,7 +4,14 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical" >
-    
+	<ProgressBar
+        android:id="@+id/progressBarOne"
+        style="@style/CustomProgressBarHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:progressDrawable="@drawable/custom_progress_bar"
+        android:layout_gravity="center"/>
+	    
 	<WebView
 	    android:id="@+id/result"
 	    android:layout_width="fill_parent"
@@ -12,6 +19,7 @@
         android:layout_weight="0.20"
         android:layerType="software"
 	/>
+
 	<View
 	    android:id="@+id/divider"
 	    android:layout_width="fill_parent"
@@ -19,6 +27,13 @@
 	    android:layout_weight="0.01"
 	    android:visibility="gone"
 	    android:background="@android:color/darker_gray"/>
+    <ProgressBar
+        android:id="@+id/progressBarTwo"
+        style="@style/CustomProgressBarHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:progressDrawable="@drawable/custom_progress_bar"
+        android:visibility="gone"/>
 	<WebView
 	    android:id="@+id/result2"
 	    android:layout_width="fill_parent"
@@ -28,10 +43,11 @@
         android:layerType="software"
 	/>
 	<LinearLayout
-	    android:layout_width="wrap_content"
+	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:layout_gravity="center"
-	    android:orientation="horizontal">
+	    android:gravity="center"
+	    android:orientation="horizontal"
+	    android:background="@color/LightBlack">
 
 		<ImageButton
 		    android:id="@+id/newYorkTimesButton"
