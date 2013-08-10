@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical" >
+    
+	<WebView
+	    android:id="@+id/result"
+	    android:layout_width="fill_parent"
+	    android:layout_height="0dp"
+        android:layout_weight="0.20"
+        android:layerType="software"
+	/>
+	<View
+	    android:id="@+id/divider"
+	    android:layout_width="fill_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="0.01"
+	    android:visibility="gone"
+	    android:background="@android:color/darker_gray"/>
+	<WebView
+	    android:id="@+id/result2"
+	    android:layout_width="fill_parent"
+	    android:layout_height="0dp"
+        android:layout_weight="0.20"
+        android:visibility="gone"
+        android:layerType="software"
+	/>
+	<LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_gravity="center"
+	    android:orientation="horizontal">
+
+		<ImageButton
+		    android:id="@+id/newYorkTimesButton"
+		    android:layout_width="50dp"
+		    android:layout_height="50dp"
+		    android:contentDescription="@string/previewText"
+		    android:src="@drawable/new_york_times_icon" />
+
+	<ImageButton
+	    android:id="@+id/wikipediaButton"
+	    android:layout_width="50dp"
+	    android:layout_height="50dp"
+	    android:src="@drawable/wikipedia_icon"
+	    android:contentDescription="@string/previewText"/>
+	<Button
+	    android:id = "@+id/compareButton"
+	    android:layout_width="wrap_content"
+	    android:layout_height="fill_parent"
+	    android:textSize="@dimen/searchButtonTextSize"
+	    android:text="@string/compareButtonText"
+	    />
+	</LinearLayout>
+</LinearLayout>
