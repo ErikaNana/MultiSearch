@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
@@ -19,15 +18,25 @@ import android.widget.Toast;
 public class SearchResults extends Activity implements OnClickListener{
 	public static final String WIKIPEDIA_URL = "http://en.wikipedia.org/wiki/";
 	public static final String NTY_URL = "http://query.nytimes.com/search/sitesearch/#/";
-	public static final String NTY_24HRS = "/24hours/";
+	public static final String NYT_24HRS = "/24hours/";
 	public static final String COMPARE_MODE_TEXT = "Leave Compare Mode";
+	public static final String GOOGLE_URL = "https://www.google.com/search?q=";
+	public static final String TUMBLR_URL = "http://www.tumblr.com/tagged/";
+	public static final String PINTEREST_URL = "http://pinterest.com/search/pins/?q=";
+	
 	public static final int NYT = 1;
 	public static final int WIKIPEDIA = 2;
+	public static final int GOOGLE = 3;
+	public static final int TUMBLR = 4;
+	public static final int PINTEREST = 5;
 	
 	WebView mResult;
 	WebView mResult2;
 	ImageButton mGoToWikipedia;
 	ImageButton mGoToNewYorkTimes;
+	ImageButton mGoGoogle;
+	ImageButton mGoTumblr;
+	ImageButton mGoPinterest;
 	Button mCompareButton;
 	String mTerm;
 	View mDivider;
@@ -45,6 +54,9 @@ public class SearchResults extends Activity implements OnClickListener{
 		
 		mGoToWikipedia = (ImageButton) findViewById(R.id.wikipediaButton);
 		mGoToNewYorkTimes = (ImageButton) findViewById(R.id.newYorkTimesButton);
+		mGoGoogle = (ImageButton) findViewById(R.id.googleButton);
+		mGoTumblr = (ImageButton) findViewById(R.id.tumblrButton);
+		mGoPinterest = (ImageButton) findViewById(R.id.pinterestButton);
 		mCompareButton = (Button) findViewById(R.id.compareButton);
 		mDivider = findViewById(R.id.divider);
 		mPBOne = (ProgressBar) findViewById(R.id.progressBarOne);
@@ -52,6 +64,9 @@ public class SearchResults extends Activity implements OnClickListener{
 		
 		mGoToWikipedia.setOnClickListener(this);
 		mGoToNewYorkTimes.setOnClickListener(this);
+		mGoGoogle.setOnClickListener(this);
+		mGoTumblr.setOnClickListener(this);
+		mGoPinterest.setOnClickListener(this);
 		mCompareButton.setOnClickListener(this);
 		
 		Toast.makeText(getApplicationContext(), "Searching for:  " + mTerm, Toast.LENGTH_SHORT).show();
@@ -68,17 +83,35 @@ public class SearchResults extends Activity implements OnClickListener{
 		mResult2.setWebViewClient(new WebViewClient());
 		
 		//default is the Wikipedia result
-		openWikipedia(mResult);
+		launchWebsite(mResult, WIKIPEDIA);
 	}
 	
-	public void openWikipedia(WebView window) {
-		window.loadUrl(WIKIPEDIA_URL + mTerm);
+	public void launchWebsite(WebView window, int webSite) {
+		switch(webSite) {
+			case WIKIPEDIA:{
+				window.loadUrl(WIKIPEDIA_URL + mTerm);
+				break;
+			}
+			case NYT:{
+				window.loadUrl(NTY_URL + mTerm + NYT_24HRS);
+				break;
+			}
+			case GOOGLE:{
+				window.loadUrl(GOOGLE_URL + mTerm);
+				break;
+			}
+			case TUMBLR:{
+				window.loadUrl(TUMBLR_URL + mTerm);
+				break;
+			}
+			case PINTEREST:{
+				window.loadUrl(PINTEREST_URL + mTerm);
+				break;
+			}
+		}
+
 	}
 
-	public void openNYT(WebView window) {
-		Log.w("SR", NTY_URL + mTerm + NTY_24HRS);
-		window.loadUrl(NTY_URL + mTerm + NTY_24HRS);
-	}
 	@Override
 	public void onClick(View view) {
 		switch(view.getId()) {
@@ -88,6 +121,18 @@ public class SearchResults extends Activity implements OnClickListener{
 			}
 			case R.id.newYorkTimesButton:{
 				setWhichWindow(NYT);
+				break;
+			}
+			case R.id.googleButton:{
+				setWhichWindow(GOOGLE);
+				break;
+			}
+			case R.id.tumblrButton:{
+				setWhichWindow(TUMBLR);
+				break;
+			}
+			case R.id.pinterestButton:{
+				setWhichWindow(PINTEREST);
 				break;
 			}
 			case R.id.compareButton:{
@@ -108,33 +153,14 @@ public class SearchResults extends Activity implements OnClickListener{
 	}
 	
 	public void setWhichWindow(int type) {
-
 		if (mCompareMode) {
 			//if there is something in the result window
 			if (!mResult.getUrl().equals("")) {
-				switch (type) {
-					case NYT:{
-						openNYT(mResult2);
-						break;
-					}
-					case WIKIPEDIA:{
-						openWikipedia(mResult2);
-						break;
-					}
-				}
+				launchWebsite(mResult2, type);
 			}
 		}
 		else {
-			switch (type) {
-				case NYT:{
-					openNYT(mResult);
-					break;
-				}
-				case WIKIPEDIA:{
-					openWikipedia(mResult);
-					break;
-				}
-		}
+			launchWebsite(mResult, type);
 		}
 	}
 	

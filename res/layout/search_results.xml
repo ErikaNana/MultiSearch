@@ -48,8 +48,25 @@
 	    android:gravity="center"
 	    android:orientation="horizontal"
 	    android:background="@color/LightBlack">
-
-		<ImageButton
+	<ImageButton
+	    android:id="@+id/pinterestButton"
+	    android:layout_width="50dp"
+	    android:layout_height="50dp"
+	    android:src="@drawable/pinterest"
+	    android:contentDescription="@string/previewText"/>
+	<ImageButton
+	    android:id="@+id/tumblrButton"
+	    android:layout_width="50dp"
+	    android:layout_height="50dp"
+	    android:src="@drawable/tumblr"
+	    android:contentDescription="@string/previewText"/>
+	<ImageButton
+	    android:id="@+id/googleButton"
+	    android:layout_width="50dp"
+	    android:layout_height="50dp"
+	    android:src="@drawable/google"
+	    android:contentDescription="@string/previewText"/>
+	<ImageButton
 		    android:id="@+id/newYorkTimesButton"
 		    android:layout_width="50dp"
 		    android:layout_height="50dp"
@@ -62,6 +79,7 @@
 	    android:layout_height="50dp"
 	    android:src="@drawable/wikipedia_icon"
 	    android:contentDescription="@string/previewText"/>
+
 	<Button
 	    android:id = "@+id/compareButton"
 	    android:layout_width="wrap_content"
