@@ -5,4 +5,6 @@
     <color name="OffGrey">#C4C4C4</color>
     <color name="Green">#00FF00</color>
     <color name="OffWhite">#FEFEFA</color>
+    <color name = "AndroidLightBlue">#33B5E5</color>
+    <color name = "ReallyLightBlue">#D6F0F9</color>
 </resources>
