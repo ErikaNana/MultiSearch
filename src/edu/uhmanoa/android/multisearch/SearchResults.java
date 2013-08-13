@@ -11,13 +11,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 @SuppressLint("SetJavaScriptEnabled")
 
@@ -50,7 +48,10 @@ public class SearchResults extends Activity implements OnClickListener{
 	ImageButton mGoPinterest;
 	ImageButton mGoAmazon;
 	ImageButton mGoTwitter;
-	LinearLayout mLayout;
+	
+	LinearLayout mButtonLayout;
+	LinearLayout mPlaceHolderOne;
+	LinearLayout mPlaceHolderTwo;
 	
 	Button mCompareButton;
 	String mTerm;
@@ -70,11 +71,30 @@ public class SearchResults extends Activity implements OnClickListener{
 		mTerm = thisIntent.getStringExtra(Welcome.SEARCH_TERM);
 		
 		mCompareButton = (Button) findViewById(R.id.compareButton);
+		mCompareButton.setOnClickListener(this);
+		
+		mPlaceHolderOne = (LinearLayout) findViewById(R.id.windowOne);
+		mPlaceHolderTwo = (LinearLayout) findViewById(R.id.windowTwo);
+		
+		CustomWebViewWindow window = new CustomWebViewWindow(this);		
+		window.launchWebsite(AMAZON, mTerm);
+		mPlaceHolderOne.addView(window);
+		mButtonLayout = (LinearLayout) findViewById(R.id.buttonLayout);
+		
+		mGoAmazon = createAndAddButton(AMAZON);
+		mGoPinterest = createAndAddButton(PINTEREST);
+		mGoGoogle = createAndAddButton(GOOGLE);
+		mGoToNewYorkTimes = createAndAddButton(NYT);
+		mGoToWikipedia = createAndAddButton(WIKIPEDIA);
+		mGoTumblr = createAndAddButton(TUMBLR);
+		mGoTwitter = createAndAddButton(TWITTER);
+		
+/*		mCompareButton = (Button) findViewById(R.id.compareButton);
 		mDivider = findViewById(R.id.divider);
 		mPBOne = (ProgressBar) findViewById(R.id.progressBarOne);
 		mPBTwo = (ProgressBar) findViewById(R.id.progressBarTwo);
 		
-		mLayout = (LinearLayout) findViewById(R.id.buttonLayout);
+		mButtonLayout = (LinearLayout) findViewById(R.id.buttonLayout);
 		
 		mGoAmazon = createAndAddButton(AMAZON);
 		mGoPinterest = createAndAddButton(PINTEREST);
@@ -100,7 +120,21 @@ public class SearchResults extends Activity implements OnClickListener{
 		mResult2.setWebViewClient(new WebViewClient());
 		
 		//default is the Wikipedia result
-		launchWebsite(mResult, WIKIPEDIA);
+		launchWebsite(mResult, WIKIPEDIA);*/
+/*		nMainLayout = (LinearLayout) findViewById(R.id.mainLayout);
+		CustomWebViewWindow window = new CustomWebViewWindow(this);
+		CustomWebViewWindow windowTwo = new CustomWebViewWindow(this);
+		window.launchWebsite(GOOGLE, mTerm);
+		windowTwo.launchWebsite(AMAZON, mTerm);
+		//add it above scrollview
+		
+		nMainLayout.addView(window);
+		nMainLayout.addView(windowTwo);*/
+		
+/*		LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View window = inflater.inflate(R.layout.webview_window, null);
+		ImageButton button = (ImageButton) window.findViewById(R.id.exitButton);
+		button.setVisibility(View.VISIBLE);*/
 	}
 	
 	public void launchWebsite(WebView window, int webSite) {
@@ -187,7 +221,11 @@ public class SearchResults extends Activity implements OnClickListener{
 				break;
 			}
 			case R.id.compareButton:{
-				if (mCompareButton.getText().equals(LEAVE_COMPARE_MODE_TEXT)){
+				mPlaceHolderTwo.setVisibility(View.VISIBLE);
+				CustomWebViewWindow windowTwo = new CustomWebViewWindow(this);
+				windowTwo.launchWebsite(AMAZON, mTerm);
+				
+/*				if (mCompareButton.getText().equals(LEAVE_COMPARE_MODE_TEXT)){
 					mCompareButton.setText("Compare");
 					mDivider.setVisibility(View.GONE);
 					mResult2.setVisibility(View.GONE);
@@ -198,7 +236,7 @@ public class SearchResults extends Activity implements OnClickListener{
 					mCompareButton.setText(LEAVE_COMPARE_MODE_TEXT);
 					mDivider.setVisibility(View.VISIBLE);
 					mResult2.setVisibility(View.VISIBLE);
-				}
+				}*/
 				break;
 			}
 		}
@@ -272,7 +310,7 @@ public class SearchResults extends Activity implements OnClickListener{
 				button.setImageResource(R.drawable.twitter);
 			}
 		}
-		mLayout.addView(button);
+		mButtonLayout.addView(button);
 		
 		return button;
 	}

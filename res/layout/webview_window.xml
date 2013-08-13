@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/window"
+ 	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+	<ProgressBar
+		android:id="@+id/progressBar"
+		style="@style/CustomProgressBarHorizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:progressDrawable="@drawable/custom_progress_bar"
+		android:layout_gravity="center"/>
+			    
+	<WebView
+		android:id="@+id/webView"
+		android:layout_below="@+id/progressBar"
+		android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layerType="software"
+	    android:scrollbarThumbVertical="@drawable/custom_scroll_bar"/>
+	<ImageButton
+		android:id="@+id/exitButton"
+	 	android:layout_height="35dip"
+		android:layout_width = "35dip"
+		android:layout_centerInParent="true"
+		android:contentDescription="@string/previewText"
+		android:background="@android:color/transparent"
+		android:visibility="gone"
+		android:src="@drawable/exit_button"/>
+	</RelativeLayout>
